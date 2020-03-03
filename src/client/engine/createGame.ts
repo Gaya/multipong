@@ -7,7 +7,6 @@ import createGameTicker from './createGameTicker';
 
 import createTimeHandler from './handlers/TimeHandler';
 import createPlayerHandler from './handlers/PlayerHandler';
-import createAutoMoveHandler from './handlers/AutoMoveHandler';
 
 interface Game {
   tick: (time: number) => GameState;
@@ -20,7 +19,6 @@ function createGame(gameStateSubject: Observable<GameState>): Game {
 
   ticker.addHandler(createTimeHandler());
   ticker.addHandler(createPlayerHandler());
-  ticker.addHandler(createAutoMoveHandler());
 
   return {
     tick: ticker.gameTick,

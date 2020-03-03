@@ -43,6 +43,9 @@ function Render({ subject }: RenderProps): React.ReactElement {
       <g id="player">
         <rect width="4" rx="3" height={playerHeight} fill="white" x={playerX} y={playerY} />
       </g>
+      <g id="balls">
+        <circle cx="100" cy="100" r="4" fill="white" />
+      </g>
     </svg>
   );
 }

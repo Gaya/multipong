@@ -19,6 +19,8 @@ function createRootInDocument(): HTMLDivElement {
   body.style.margin = '0';
   root.style.height = '100vh';
   root.style.width = '100vw';
+  root.style.display = 'flex';
+  root.style.backgroundColor = '#000';
 
   return root;
 }

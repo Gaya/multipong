@@ -12,9 +12,7 @@ function Render({ subject }: RenderProps): React.ReactElement {
 
   useEffect(() => {
     subject.attach('GameRender', {
-      update(newState) {
-        setGameState(newState);
-      },
+      update: setGameState,
     });
 
     return (): void => {

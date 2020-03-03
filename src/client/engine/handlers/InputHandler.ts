@@ -16,7 +16,7 @@ function createInputHandler(): GameTickHandler {
     input = input.filter((p) => p !== code);
   });
 
-  return function inputHandler(time: number, state: GameState): GameState {
+  return function inputHandler(state: GameState): GameState {
     return {
       ...state,
       input,

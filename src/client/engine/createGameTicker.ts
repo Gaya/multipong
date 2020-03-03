@@ -10,6 +10,7 @@ interface GameTicker {
 }
 
 function createGameTicker(gameStateSubject: Observable<GameState>): GameTicker {
+  let prevTime = 0;
   const handlers: GameTickHandler[] = [];
 
   return {
@@ -21,7 +22,10 @@ function createGameTicker(gameStateSubject: Observable<GameState>): GameTicker {
     gameTick(time: number): GameState {
       const state = gameStateSubject.getState();
 
-      const newState = handlers.reduce((accState, handler) => handler(time, accState), state);
+      const newState = handlers
+        .reduce((accState, handler) => handler(accState, time, prevTime), state);
+
+      prevTime = time;
 
       return { ...newState };
     },

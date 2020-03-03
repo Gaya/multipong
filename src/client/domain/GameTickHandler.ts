@@ -1,3 +1,3 @@
 import { GameState } from './GameState';
 
-export type GameTickHandler = (time: number, state: GameState) => GameState;
+export type GameTickHandler = (state: GameState, time: number, prevTime: number) => GameState;

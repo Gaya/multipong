@@ -31,8 +31,8 @@ function Render({ subject }: RenderProps): React.ReactElement {
     gameState.player.position
     - ((gameState.player.position / 100) * gameState.player.size)
   ) * baseScale;
-  const isUp = gameState.input.indexOf(ControlInput.UP) > -1;
-  const isDown = gameState.input.indexOf(ControlInput.DOWN) > -1;
+  const isUpPressed = gameState.input.indexOf(ControlInput.UP) > -1;
+  const isDownPressed = gameState.input.indexOf(ControlInput.DOWN) > -1;
 
   return (
     <svg viewBox="0 0 400 400">
@@ -50,8 +50,8 @@ function Render({ subject }: RenderProps): React.ReactElement {
         <circle cx="100" cy="100" r="4" fill="white" />
       </g>
       <g id="debug">
-        <path d="M375,25 L380,15 L385,25 Z" fill={isUp ? 'red' : 'white'} />
-        <path d="M375,28 L380,38 L385,28 Z" fill={isDown ? 'red' : 'white'} />
+        <path d="M375,25 L380,15 L385,25 Z" fill={isUpPressed ? 'red' : 'white'} />
+        <path d="M375,28 L380,38 L385,28 Z" fill={isDownPressed ? 'red' : 'white'} />
       </g>
     </svg>
   );

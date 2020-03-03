@@ -1,12 +1,12 @@
 import { createElement } from 'react';
 import { render } from 'react-dom';
 
-import { RenderSubject } from '../domain/RenderObservable';
+import { Observable } from '../domain/Observable';
 
-import createRenderSubject from './Subject';
 import Render from './Render';
 
 import { info } from '../helpers/logger';
+import { GameState } from '../domain/GameState';
 
 function createRootInDocument(): HTMLDivElement {
   const { body } = document;
@@ -23,14 +23,10 @@ function createRootInDocument(): HTMLDivElement {
   return root;
 }
 
-export default function initializeRendering(): RenderSubject {
+export default function initializeRendering(renderSubject: Observable<GameState>): void {
   info('Initialize Rendering');
 
   const root = createRootInDocument();
 
-  const renderSubject = createRenderSubject();
-
   render(createElement(Render, { subject: renderSubject }), root);
-
-  return renderSubject;
 }

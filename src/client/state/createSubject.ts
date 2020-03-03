@@ -1,13 +1,8 @@
-import { RenderListener, RenderSubject } from '../domain/RenderObservable';
-import { GameState } from '../domain/GameState';
+import { Observer, Observable } from '../domain/Observable';
 
 import { info } from '../helpers/logger';
 
-const defaultState = {
-  started: false,
-};
-
-function createRenderSubject(): RenderSubject {
+function createSubject<T>(defaultState: T): Observable<T> {
   return {
     currentState: { ...defaultState },
     listeners: {},
@@ -22,11 +17,11 @@ function createRenderSubject(): RenderSubject {
 
       delete this.listeners[name];
     },
-    setState(newState): GameState {
+    setState(newState): T {
       this.currentState = newState;
 
       Object.entries(this.listeners)
-        .forEach(([, listener]: [string, RenderListener]) => {
+        .forEach(([, listener]: [string, Observer<T>]) => {
           listener.update(newState);
         });
 
@@ -35,4 +30,4 @@ function createRenderSubject(): RenderSubject {
   };
 }
 
-export default createRenderSubject;
+export default createSubject;

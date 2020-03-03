@@ -1,10 +1,10 @@
 import React, { useState, useEffect } from 'react';
 
-import { RenderSubject } from '../domain/RenderObservable';
+import { Observable } from '../domain/Observable';
 import { GameState } from '../domain/GameState';
 
 interface RenderProps {
-  subject: RenderSubject;
+  subject: Observable<GameState>;
 }
 
 function Render({ subject }: RenderProps): React.ReactElement {
@@ -22,7 +22,9 @@ function Render({ subject }: RenderProps): React.ReactElement {
 
   if (!gameState) return null;
 
-  return <div>Started: {gameState.started.toString()}</div>;
+  return (
+    <div>{gameState.time}</div>
+  );
 }
 
 export default Render;

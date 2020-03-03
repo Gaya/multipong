@@ -1,5 +1,22 @@
+import { GameState } from './domain/GameState';
+
 import initializeRendering from './render/initializeRendering';
+import createSubject from './state/createSubject';
 
-const renderSubject = initializeRendering();
+const gameStateSubject = createSubject<GameState>({
+  started: false,
+  time: 0,
+});
 
-renderSubject.setState({ started: true });
+initializeRendering(gameStateSubject);
+
+function tick(time: number): void {
+  gameStateSubject.setState({
+    started: true,
+    time,
+  });
+
+  window.requestAnimationFrame(tick);
+}
+
+window.requestAnimationFrame(tick);

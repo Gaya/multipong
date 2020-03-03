@@ -1,3 +1,5 @@
-const hey: string = "Hallo met Adje";
+import initializeRendering from './render/initializeRendering';
 
-console.log(hey);
+const renderSubject = initializeRendering();
+
+renderSubject.setState({ started: true });

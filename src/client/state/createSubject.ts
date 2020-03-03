@@ -3,24 +3,26 @@ import { Observer, Observable } from '../domain/Observable';
 import { info } from '../helpers/logger';
 
 function createSubject<T>(defaultState: T): Observable<T> {
+  let currentState: T = { ...defaultState };
+  const listeners: { [name: string]: Observer<T> } = {};
+
   return {
-    currentState: { ...defaultState },
-    listeners: {},
     attach(name, newListener): void {
       info(`Attaching "${name}"`);
 
-      this.listeners[name] = newListener;
-      newListener.update(this.currentState);
+      listeners[name] = newListener;
+
+      newListener.update(currentState);
     },
     detach(name): void {
       info(`Detaching "${name}"`);
 
-      delete this.listeners[name];
+      delete listeners[name];
     },
-    setState(newState): T {
-      this.currentState = newState;
+    setState(newState: T): T {
+      currentState = newState;
 
-      Object.entries(this.listeners)
+      Object.entries(listeners)
         .forEach(([, listener]: [string, Observer<T>]) => {
           listener.update(newState);
         });

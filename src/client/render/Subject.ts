@@ -1,6 +1,8 @@
 import { RenderListener, RenderSubject } from '../domain/RenderObservable';
 import { GameState } from '../domain/GameState';
 
+import { info } from '../helpers/logger';
+
 const defaultState = {
   started: false,
 };
@@ -10,10 +12,14 @@ function createRenderSubject(): RenderSubject {
     currentState: { ...defaultState },
     listeners: {},
     attach(name, newListener): void {
+      info(`Attaching "${name}"`);
+
       this.listeners[name] = newListener;
       newListener.update(this.currentState);
     },
     detach(name): void {
+      info(`Detaching "${name}"`);
+
       delete this.listeners[name];
     },
     setState(newState): GameState {

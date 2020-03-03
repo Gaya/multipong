@@ -1,9 +1,12 @@
+import { createElement } from 'react';
 import { render } from 'react-dom';
 
 import { RenderSubject } from '../domain/RenderObservable';
 
 import createRenderSubject from './Subject';
 import Render from './Render';
+
+import { info } from '../helpers/logger';
 
 function createRootInDocument(): HTMLDivElement {
   const { body } = document;
@@ -21,11 +24,13 @@ function createRootInDocument(): HTMLDivElement {
 }
 
 export default function initializeRendering(): RenderSubject {
+  info('Initialize Rendering');
+
   const root = createRootInDocument();
 
   const renderSubject = createRenderSubject();
 
-  render(Render({ subject: renderSubject }), root);
+  render(createElement(Render, { subject: renderSubject }), root);
 
   return renderSubject;
 }

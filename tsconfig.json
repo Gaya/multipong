@@ -11,8 +11,7 @@
     "esModuleInterop": true,
     "moduleResolution": "node",
     "typeRoots": [
-      "./node_modules/@types",
-      "./src/client/domain"
+      "./node_modules/@types"
     ]
   },
   "exclude": [

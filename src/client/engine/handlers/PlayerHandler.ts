@@ -12,7 +12,7 @@ function createPlayerHandler(): GameTickHandler {
         ...state,
         started: true,
         player: {
-          position: 0,
+          position: 50,
           size: 10,
           deg: 180,
         },

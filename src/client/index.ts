@@ -6,6 +6,7 @@ import createGame from './engine/createGame';
 
 const gameStateSubject = createSubject<GameState>({
   enemies: [],
+  input: [],
   started: false,
   time: 0,
 }, 'GameState');

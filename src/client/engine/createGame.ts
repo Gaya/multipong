@@ -7,6 +7,7 @@ import createGameTicker from './createGameTicker';
 
 import createTimeHandler from './handlers/TimeHandler';
 import createPlayerHandler from './handlers/PlayerHandler';
+import createInputHandler from './handlers/InputHandler';
 
 interface Game {
   tick: (time: number) => GameState;
@@ -17,6 +18,7 @@ function createGame(gameStateSubject: Observable<GameState>): Game {
 
   const ticker = createGameTicker(gameStateSubject);
 
+  ticker.addHandler(createInputHandler());
   ticker.addHandler(createTimeHandler());
   ticker.addHandler(createPlayerHandler());
 

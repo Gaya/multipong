@@ -4,6 +4,7 @@ export interface Observer<T> {
 
 export interface Observable<T> {
   setState: (newState: T) => T;
+  getState: () => T;
   attach: (name: string, listener: Observer<T>) => void;
   detach: (name: string) => void;
 }

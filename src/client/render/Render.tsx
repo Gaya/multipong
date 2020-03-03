@@ -20,10 +20,10 @@ function Render({ subject }: RenderProps): React.ReactElement {
     };
   }, [subject]);
 
-  if (!gameState) return null;
+  if (!gameState || !gameState.started) return null;
 
   return (
-    <div>{gameState.time}</div>
+    <input type="range" value={gameState.player.position} min={0} max={100} />
   );
 }
 

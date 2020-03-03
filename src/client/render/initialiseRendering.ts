@@ -23,8 +23,8 @@ function createRootInDocument(): HTMLDivElement {
   return root;
 }
 
-export default function initializeRendering(renderSubject: Observable<GameState>): void {
-  info('Initialize Rendering');
+export default function initialiseRendering(renderSubject: Observable<GameState>): void {
+  info('Initialise rendering');
 
   const root = createRootInDocument();
 

@@ -6,14 +6,16 @@ function createInputHandler(): GameTickHandler {
   const availableInputs = [ControlInput.UP, ControlInput.DOWN];
   let input: ControlInput[] = [];
 
-  window.addEventListener('keydown', ({ code }: KeyboardEvent) => {
-    if (availableInputs.indexOf(code as ControlInput) === -1) return;
+  window.addEventListener('keydown', ({ key }: KeyboardEvent) => {
+    const keyCode = key as ControlInput;
 
-    input = [code as ControlInput, ...input];
+    if (availableInputs.indexOf(keyCode) === -1) return;
+
+    input = [keyCode, ...input];
   });
 
-  window.addEventListener('keyup', ({ code }: KeyboardEvent) => {
-    input = input.filter((p) => p !== code);
+  window.addEventListener('keyup', ({ key }: KeyboardEvent) => {
+    input = input.filter((p) => p !== key);
   });
 
   return function inputHandler(state: GameState): GameState {

@@ -5,6 +5,7 @@ import createSubject from './state/createSubject';
 import createGame from './engine/createGame';
 
 const gameStateSubject = createSubject<GameState>({
+  balls: [],
   enemies: [],
   input: [],
   started: false,

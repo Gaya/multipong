@@ -3,7 +3,7 @@ import { GameState } from '../../domain/GameState';
 
 import { info } from '../../helpers/logger';
 import { ControlInput } from '../../domain/ControlInput';
-import calcPositionDelta from '../calcPositionDelta';
+import calcPositionDelta, { distanceByTime } from '../calcPositionDelta';
 
 const min = 0;
 const max = 100;
@@ -14,9 +14,9 @@ function calcNewPosition(
   moveUp: boolean,
   timePassed: number,
 ): number {
-  const { y } = calcPositionDelta(timePassed, speed, moveUp ? 90 : 180);
+  const { y } = calcPositionDelta(distanceByTime(timePassed, speed), moveUp ? 90 : 270);
 
-  const newPosition = current + y;
+  const newPosition = current - y;
 
   if (newPosition > max) return max;
   if (newPosition < min) return min;
@@ -25,7 +25,7 @@ function calcNewPosition(
 }
 
 function createPlayerHandler(): GameTickHandler {
-  const moveSpeed = 1;
+  const moveSpeed = 1.3;
 
   return function playerHandler(state: GameState, time: number, prevTime: number): GameState {
     if (!state.started || !state.player) {

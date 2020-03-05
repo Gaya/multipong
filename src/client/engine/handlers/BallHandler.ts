@@ -2,6 +2,8 @@ import { GameTickHandler } from '../../domain/GameTickHandler';
 import { GameState } from '../../domain/GameState';
 
 import { info } from '../../helpers/logger';
+import { Ball } from '../../domain/Ball';
+import calcPositionDelta, { distanceByTime } from '../calcPositionDelta';
 
 function randomId(): string {
   return Math.floor((1 + Math.random()) * 0x10000)
@@ -13,29 +15,48 @@ type startingDegrees = 30 | 45 | 60 | 120 | 135 | 150 | 210 | 225 | 240 | 300 | 
 
 function randomDeg(): startingDegrees {
   const degrees: startingDegrees[] = [30, 45, 60, 120, 135, 150, 210, 225, 240, 300, 315, 330];
-  return degrees[Math.round(Math.random() * degrees.length)];
+  return degrees[Math.floor(Math.random() * degrees.length)];
 }
 
 function createBallHandler(): GameTickHandler {
-  return function ballHandler(state: GameState, time: number): GameState {
+  return function ballHandler(state: GameState, time: number, prevTime: number): GameState {
     if (state.started && state.balls.length === 0) {
       info('Create ball');
 
       return {
         ...state,
-        started: true,
         balls: [
           {
             angle: randomDeg(),
             id: randomId(),
-            speed: 0,
+            speed: 1,
             x: 50,
             y: 50,
           },
         ],
       };
     }
-    return { ...state, time };
+
+    if (state.balls.length > 0) {
+      const balls: Ball[] = state.balls.map((b) => {
+        const { x, y } = calcPositionDelta(distanceByTime(time - prevTime, b.speed), b.angle);
+        const newX = b.x + x;
+        const newY = b.y - y;
+
+        return {
+          ...b,
+          x: newX,
+          y: newY,
+        };
+      });
+
+      return {
+        ...state,
+        balls,
+      };
+    }
+
+    return { ...state };
   };
 }
 

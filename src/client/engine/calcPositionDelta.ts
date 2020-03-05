@@ -3,9 +3,12 @@ interface Coordinate {
   y: number;
 }
 
-function calcPositionDelta(timePassed: number, speed: number, angle: number): Coordinate {
+export function distanceByTime(timePassed: number, speed: number): number {
+  return ((timePassed / 20) * speed);
+}
+
+function calcPositionDelta(c: number, angle: number): Coordinate {
   const calcAngle = angle % 90;
-  const c = ((timePassed / 15) * speed);
   const a = c * Math.sin(calcAngle * (Math.PI / 180));
   const b = Math.sqrt(c ** 2 - a ** 2);
 
@@ -13,6 +16,7 @@ function calcPositionDelta(timePassed: number, speed: number, angle: number): Co
 
   switch (axis) {
     case 4:
+    case 0:
       return {
         x: a,
         y: b * -1 || 0,

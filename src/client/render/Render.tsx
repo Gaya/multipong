@@ -36,8 +36,9 @@ function Render({ subject }: RenderProps): React.ReactElement {
         <rect width="100" height="100" fill="black" />
       </g>
       <g id="sides">
-        <path strokeDasharray="3,3" d="M0 0 l100 0" stroke="white" strokeWidth={0.5} />
-        <path strokeDasharray="3,3" d="M0 100 l100 0" stroke="white" strokeWidth={0.5} />
+        <path strokeDasharray="3,3" d="M0 0 l100 0" stroke="white" strokeWidth={0.3} />
+        <path strokeDasharray="3,3" d="M0 100 l100 0" stroke="white" strokeWidth={0.3} />
+        <path strokeDasharray="3,3" d="M50 0 l0 100" stroke="white" strokeWidth={0.5} />
       </g>
       <g id="player">
         <rect width="1" rx="1" height={playerHeight} fill="white" x={playerX} y={playerY} />

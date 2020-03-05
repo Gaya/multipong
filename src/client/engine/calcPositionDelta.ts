@@ -16,7 +16,11 @@ function calcPositionDelta(timePassed: number, speed: number, angle: number): Co
   Angle B (β):	90
   Angle C (γ):	60
 
+  Calc a:
+  Math.tan(30 * (Math.PI / 180)) * 10
 
+  Calc c:
+  Math.tan(30 * (Math.PI / 180)) * 10
 
  */
 

@@ -23,35 +23,33 @@ function Render({ subject }: RenderProps): React.ReactElement {
 
   if (!gameState || !gameState.started) return null;
 
-  // gameState.player.position
-  const baseScale = 4;
-  const playerHeight = gameState.player.size * baseScale;
-  const playerX = 5;
-  const playerY = (
-    gameState.player.position
-    - ((gameState.player.position / 100) * gameState.player.size)
-  ) * baseScale;
+  const playerHeight = gameState.player.size;
+  const playerX = 1;
+  const playerY = gameState.player.position
+    - ((gameState.player.position / 100) * gameState.player.size);
   const isUpPressed = gameState.input.indexOf(ControlInput.UP) > -1;
   const isDownPressed = gameState.input.indexOf(ControlInput.DOWN) > -1;
 
   return (
-    <svg viewBox="0 0 400 400">
+    <svg viewBox="0 0 100 100">
       <g id="background">
-        <rect width="400" height="400" fill="black" />
+        <rect width="100" height="100" fill="black" />
       </g>
       <g id="sides">
-        <path strokeDasharray="10,10" d="M0 0 l400 0" stroke="white" strokeWidth={2} />
-        <path strokeDasharray="10,10" d="M0 400 l400 0" stroke="white" strokeWidth={2} />
+        <path strokeDasharray="3,3" d="M0 0 l100 0" stroke="white" strokeWidth={0.5} />
+        <path strokeDasharray="3,3" d="M0 100 l100 0" stroke="white" strokeWidth={0.5} />
       </g>
       <g id="player">
-        <rect width="4" rx="3" height={playerHeight} fill="white" x={playerX} y={playerY} />
+        <rect width="1" rx="1" height={playerHeight} fill="white" x={playerX} y={playerY} />
       </g>
-      <g id="balls">
-        <circle cx="100" cy="100" r="4" fill="white" />
-      </g>
+      {gameState.balls.length > 0 && (
+        <g id="balls">
+          {gameState.balls.map((ball) => <circle key={ball.id} cx={ball.x} cy={ball.y} r="1" fill="white" />)}
+        </g>
+      )}
       <g id="debug">
-        <path d="M375,25 L380,15 L385,25 Z" fill={isUpPressed ? 'red' : 'white'} />
-        <path d="M375,28 L380,38 L385,28 Z" fill={isDownPressed ? 'red' : 'white'} />
+        <path d="M94,6 L95,4 L96,6 Z" fill={isUpPressed ? 'red' : 'white'} />
+        <path d="M94,7 L95,9 L96,7 Z" fill={isDownPressed ? 'red' : 'white'} />
       </g>
     </svg>
   );

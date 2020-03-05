@@ -26,11 +26,11 @@ function createBallHandler(): GameTickHandler {
         started: true,
         balls: [
           {
+            angle: randomDeg(),
             id: randomId(),
+            speed: 0,
             x: 50,
             y: 50,
-            deg: randomDeg(),
-            speed: 0,
           },
         ],
       };

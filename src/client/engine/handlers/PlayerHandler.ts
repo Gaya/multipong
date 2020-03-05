@@ -3,26 +3,29 @@ import { GameState } from '../../domain/GameState';
 
 import { info } from '../../helpers/logger';
 import { ControlInput } from '../../domain/ControlInput';
+import calcPositionDelta from '../calcPositionDelta';
+
+const min = 0;
+const max = 100;
+
+function calcNewPosition(
+  current: number,
+  speed: number,
+  moveUp: boolean,
+  timePassed: number,
+): number {
+  const { y } = calcPositionDelta(timePassed, speed, moveUp ? 90 : 180);
+
+  const newPosition = current + y;
+
+  if (newPosition > max) return max;
+  if (newPosition < min) return min;
+
+  return newPosition;
+}
 
 function createPlayerHandler(): GameTickHandler {
   const moveSpeed = 1;
-  const min = 0;
-  const max = 100;
-
-  function calcNewPosition(
-    current: number,
-    speed: number,
-    moveUp: boolean,
-    timePassed: number,
-  ): number {
-    const direction = moveUp ? -1 : 1;
-    const newPosition = current + ((timePassed / 15) * speed * direction);
-
-    if (newPosition > max) return max;
-    if (newPosition < min) return min;
-
-    return newPosition;
-  }
 
   return function playerHandler(state: GameState, time: number, prevTime: number): GameState {
     if (!state.started || !state.player) {
@@ -32,9 +35,9 @@ function createPlayerHandler(): GameTickHandler {
         ...state,
         started: true,
         player: {
+          angle: 180,
           position: 50,
           size: 10,
-          deg: 180,
         },
       };
     }

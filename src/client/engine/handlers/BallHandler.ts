@@ -43,6 +43,8 @@ function createBallHandler(): GameTickHandler {
         const newX = b.x + x;
         const newY = b.y - y;
 
+        // @todo check for collision
+
         return {
           ...b,
           x: newX,

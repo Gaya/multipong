@@ -4,6 +4,9 @@ import { GameState } from '../../domain/GameState';
 import { info } from '../../helpers/logger';
 import { Ball } from '../../domain/Ball';
 import calcPositionDelta, { distanceByTime } from '../modules/calcPositionDelta';
+import playfieldPointsByPlayers from '../modules/playfield';
+import intersect from '../modules/intersect';
+import { Coordinate, Line } from '../../domain/Coordinate';
 
 function randomId(): string {
   return Math.floor((1 + Math.random()) * 0x10000)
@@ -19,7 +22,15 @@ function randomDeg(): startingDegrees {
 }
 
 function createBallHandler(): GameTickHandler {
+  let currentPlayers = 0;
+  let playField = playfieldPointsByPlayers(currentPlayers);
+
   return function ballHandler(state: GameState, time: number, prevTime: number): GameState {
+    if (currentPlayers !== state.enemies.length + 1) {
+      currentPlayers = state.enemies.length + 1;
+      playField = playfieldPointsByPlayers(currentPlayers);
+    }
+
     if (state.started && state.balls.length === 0) {
       info('Create ball');
 
@@ -43,7 +54,18 @@ function createBallHandler(): GameTickHandler {
         const newX = b.x + x;
         const newY = b.y - y;
 
-        // @todo check for collision
+        const movementLine: Line = [{ x: b.x, y: b.y }, { x: newX, y: newY }];
+
+        for (let side = 0; side < playField.length; side += 1) {
+          const endPoint = side + 1 === playField.length ? 0 : side + 1;
+          const start = playField[side];
+          const end = playField[endPoint];
+          const sideLine: Line = [start, end];
+
+          if (intersect(movementLine, sideLine)) {
+            debugger;
+          }
+        }
 
         return {
           ...b,

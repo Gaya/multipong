@@ -3,7 +3,7 @@ import { GameState } from '../../domain/GameState';
 
 import { info } from '../../helpers/logger';
 import { ControlInput } from '../../domain/ControlInput';
-import calcPositionDelta, { distanceByTime } from '../calcPositionDelta';
+import calcPositionDelta, { distanceByTime } from '../modules/calcPositionDelta';
 
 const min = 0;
 const max = 100;

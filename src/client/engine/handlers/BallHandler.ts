@@ -3,7 +3,7 @@ import { GameState } from '../../domain/GameState';
 
 import { info } from '../../helpers/logger';
 import { Ball } from '../../domain/Ball';
-import calcPositionDelta, { distanceByTime } from '../calcPositionDelta';
+import calcPositionDelta, { distanceByTime } from '../modules/calcPositionDelta';
 
 function randomId(): string {
   return Math.floor((1 + Math.random()) * 0x10000)

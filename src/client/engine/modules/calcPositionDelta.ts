@@ -1,14 +1,9 @@
-interface Coordinate {
-  x: number;
-  y: number;
-}
+import { Coordinate } from '../../domain/Coordinate';
+
+import toFixed from './toFixed';
 
 export function distanceByTime(timePassed: number, speed: number): number {
   return ((timePassed / 20) * speed);
-}
-
-function toFixed(input: number): number {
-  return parseFloat(input.toFixed(2));
 }
 
 function coordinatesBasedAngle(angle: number, a: number, b: number): Coordinate {

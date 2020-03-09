@@ -1,4 +1,4 @@
-import calcPositionDelta, { distanceByTime } from '../src/client/engine/calcPositionDelta';
+import calcPositionDelta, { distanceByTime } from '../src/client/engine/modules/calcPositionDelta';
 
 describe('calcPositionDelta', () => {
   it('Calculates delta correctly at 30 degrees', () => {

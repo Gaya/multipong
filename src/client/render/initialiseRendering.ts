@@ -20,6 +20,8 @@ function createRootInDocument(): HTMLDivElement {
   root.style.height = '100vh';
   root.style.width = '100vw';
   root.style.display = 'flex';
+  root.style.padding = '10px';
+  root.style.boxSizing = 'border-box';
   root.style.backgroundColor = '#000';
 
   return root;

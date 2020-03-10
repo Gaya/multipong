@@ -1,36 +1,38 @@
 import { Line } from '../../domain/Coordinate';
 import toFixed from './toFixed';
 
-function calcAngleDegrees(y: number, x: number): number {
-  return Math.atan2(y, x) * (180 / Math.PI);
-}
-
-function toDegrees(degrees: number): number {
+export function toDegrees(degrees: number): number {
   if (degrees < 0) {
     return toDegrees(360 + degrees);
   }
 
   if (degrees > 360) {
-    return toDegrees(360 - degrees);
+    return toDegrees(degrees % 360);
   }
 
-  return degrees;
+  return degrees || 0;
+}
+
+export function calcAngleDegrees([start, end]: Line): number {
+  const y = (end.y - start.y) * -1;
+  const x = end.x - start.x;
+
+  return toDegrees(Math.atan2(y, x) * (180 / Math.PI));
 }
 
 function calculateReflectionAngle(movementLine: Line, collisionLine: Line): number {
-  const movementLineAngle = toDegrees(calcAngleDegrees(
-    movementLine[1].y - movementLine[0].y,
-    movementLine[1].x - movementLine[0].x,
-  ));
+  const movementLineAngle = calcAngleDegrees(movementLine);
+  const collisionLineAngle = calcAngleDegrees(collisionLine);
 
-  const collisionLineAngle = toDegrees(calcAngleDegrees(
-    collisionLine[1].y - collisionLine[0].y,
-    collisionLine[1].x - collisionLine[0].x,
-  )) % 180;
+  const fromTop = collisionLineAngle > movementLineAngle;
 
-  const intersectAngle = toDegrees(collisionLineAngle - movementLineAngle);
+  const intersectAngle = toDegrees(
+    fromTop
+      ? collisionLineAngle - movementLineAngle
+      : movementLineAngle - collisionLineAngle,
+  );
 
-  return toDegrees(toFixed(collisionLineAngle + intersectAngle));
+  return toDegrees(toFixed(collisionLineAngle + (fromTop ? intersectAngle : intersectAngle * -1)));
 }
 
 export default calculateReflectionAngle;

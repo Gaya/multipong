@@ -6,7 +6,7 @@ import { Ball } from '../../domain/Ball';
 import calcPositionDelta, { distanceByTime } from '../modules/calcPositionDelta';
 import playfieldPointsByPlayers from '../modules/playfield';
 import intersect from '../modules/intersect';
-import { Coordinate, Line } from '../../domain/Coordinate';
+import { Line } from '../../domain/Coordinate';
 import calculateReflectionAngle from '../modules/calculateReflectionAngle';
 
 function randomId(): string {
@@ -20,10 +20,6 @@ type startingDegrees = 30 | 40 | 60 | 120 | 140 | 150 | 210 | 220 | 240 | 300 | 
 function randomDeg(): startingDegrees {
   const degrees: startingDegrees[] = [30, 40, 60, 120, 140, 150, 210, 220, 240, 300, 320, 330];
   return degrees[Math.floor(Math.random() * degrees.length)];
-}
-
-function calcAngleDegrees(y: number, x: number): number {
-  return Math.atan2(y, x) * (180 / Math.PI);
 }
 
 function createBallHandler(): GameTickHandler {

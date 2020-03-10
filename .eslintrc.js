@@ -3,17 +3,21 @@ module.exports = {
     browser: true,
     es6: true,
     node: true,
+    'jest/globals': true,
   },
+  ignorePatterns: ['node_modules/', 'dist/'],
   parser: '@typescript-eslint/parser',
   extends: [
     'airbnb-base',
     'plugin:react/recommended',
     'plugin:@typescript-eslint/eslint-recommended',
     'plugin:@typescript-eslint/recommended',
+    'plugin:jest/recommended',
   ],
   plugins: [
     '@typescript-eslint',
     'import',
+    'jest',
   ],
   globals: {
     Atomics: 'readonly',
@@ -43,6 +47,9 @@ module.exports = {
       typescript: {
         alwaysTryTypes: true,
       },
+    },
+    react: {
+      version: 'detect',
     },
   },
 };

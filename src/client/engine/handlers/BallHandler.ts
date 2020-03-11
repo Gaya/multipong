@@ -76,6 +76,7 @@ function createBallHandler(): GameTickHandler {
           if (intersection) {
             const newAngle = calculateReflectionAngle(movementLine, collisionLine);
 
+            // @todo 1. subtract distance to intersection 2. move from intersection 3. check if touching new intersection
             const { x: x3, y: y3 } = calcPositionDelta(distance, newAngle);
 
             return {

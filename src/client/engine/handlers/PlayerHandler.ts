@@ -16,7 +16,7 @@ function calcNewPosition(
 ): number {
   const { y } = calcPositionDelta(distanceByTime(timePassed, speed), moveUp ? 90 : 270);
 
-  const newPosition = current - y;
+  const newPosition = current + y;
 
   if (newPosition > max) return max;
   if (newPosition < min) return min;

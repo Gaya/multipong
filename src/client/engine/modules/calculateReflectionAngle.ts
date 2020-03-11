@@ -14,7 +14,7 @@ export function toDegrees(degrees: number): number {
 }
 
 export function calcAngleDegrees([start, end]: Line): number {
-  const y = (end.y - start.y) * -1;
+  const y = end.y - start.y;
   const x = end.x - start.x;
 
   return toDegrees(Math.atan2(y, x) * (180 / Math.PI));

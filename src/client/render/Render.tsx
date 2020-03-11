@@ -26,12 +26,12 @@ function Render({ subject }: RenderProps): React.ReactElement {
 
   const playerHeight = gameState.player.size;
   const playerX = 1;
-  const playerY = gameState.player.position
-    - ((gameState.player.position / 100) * gameState.player.size);
+  const renderY = 100 - gameState.player.position;
+  const playerY = renderY - (gameState.player.size * (renderY / 100));
   const isUpPressed = gameState.input.indexOf(ControlInput.UP) > -1;
   const isDownPressed = gameState.input.indexOf(ControlInput.DOWN) > -1;
 
-  const polygonPoints = playfieldSVGCoordinates(gameState.enemies.length);
+  const polygonPoints = playfieldSVGCoordinates(gameState.enemies.length + 1);
 
   return (
     <svg viewBox="0 0 100 100">

@@ -42,7 +42,7 @@ function createBallHandler(): GameTickHandler {
           {
             angle: randomDeg(),
             id: randomId(),
-            speed: 1,
+            speed: 1.5,
             x: 50,
             y: 50,
           },
@@ -57,12 +57,12 @@ function createBallHandler(): GameTickHandler {
         const { x, y } = calcPositionDelta(distanceByTime(time - prevTime, b.speed), b.angle);
 
         const newX = b.x + x;
-        const newY = b.y - y;
+        const newY = b.y + y;
 
         const { x: x2, y: y2 } = calcPositionDelta(distance + ballSize, b.angle);
 
         const newXWithPadding = b.x + x2;
-        const newYWithPadding = b.y - y2;
+        const newYWithPadding = b.y + y2;
 
         const movementLine: Line = [{ x: b.x, y: b.y }, { x: newXWithPadding, y: newYWithPadding }];
 
@@ -81,7 +81,7 @@ function createBallHandler(): GameTickHandler {
             return {
               ...b,
               x: b.x + x3,
-              y: b.y - y3,
+              y: b.y + y3,
               angle: newAngle,
             };
           }

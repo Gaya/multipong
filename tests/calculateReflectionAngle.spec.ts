@@ -28,17 +28,17 @@ describe('calcAngleDegrees', () => {
   });
 
   it('Calculates angle of line from bottom to top right', () => {
-    const line: Line = [{ x: 3, y: 3 }, { x: 7, y: -1 }];
+    const line: Line = [{ x: 3, y: -3 }, { x: 7, y: 1 }];
     expect(calcAngleDegrees(line)).toEqual(45);
   });
 
   it('Calculates angle of line from bottom to top', () => {
-    const line: Line = [{ x: 3, y: 3 }, { x: 3, y: -1 }];
+    const line: Line = [{ x: 3, y: -3 }, { x: 3, y: 1 }];
     expect(calcAngleDegrees(line)).toEqual(90);
   });
 
   it('Calculates angle of line from bottom to top left', () => {
-    const line: Line = [{ x: 3, y: 3 }, { x: -3, y: -3 }];
+    const line: Line = [{ x: 3, y: -3 }, { x: -3, y: 3 }];
     expect(calcAngleDegrees(line)).toEqual(135);
   });
 
@@ -48,17 +48,17 @@ describe('calcAngleDegrees', () => {
   });
 
   it('Calculates angle of flat line from top to bottom left', () => {
-    const line: Line = [{ x: -3, y: -3 }, { x: -5, y: -1 }];
+    const line: Line = [{ x: -3, y: 3 }, { x: -5, y: 1 }];
     expect(calcAngleDegrees(line)).toEqual(225);
   });
 
   it('Calculates angle of flat line from top to bottom', () => {
-    const line: Line = [{ x: 3, y: -3 }, { x: 3, y: -1 }];
+    const line: Line = [{ x: 3, y: 3 }, { x: 3, y: 1 }];
     expect(calcAngleDegrees(line)).toEqual(270);
   });
 
   it('Calculates angle of flat line from top to bottom right', () => {
-    const line: Line = [{ x: 3, y: -3 }, { x: 5, y: -1 }];
+    const line: Line = [{ x: 3, y: 3 }, { x: 5, y: 1 }];
     expect(calcAngleDegrees(line)).toEqual(315);
   });
 });
